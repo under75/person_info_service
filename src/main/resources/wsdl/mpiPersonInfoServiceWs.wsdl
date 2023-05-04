@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:types="http://ffoms.ru/types/mpiPersonInfoSchema" xmlns:tns="http://ffoms.ru/services/mpiPersonInfoService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="TFOMS_mpiPersonInfoService" targetNamespace="http://ffoms.ru/services/mpiPersonInfoService">
+
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://ffoms.ru/types/mpiPersonInfoSchema" schemaLocation="../xsd/mpiPersonInfoSchema.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="getInsuranceStatusRequest">
+        <wsdl:part element="types:getInsuranceStatusRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="getInsuranceStatusResponse">
+        <wsdl:part element="types:getInsuranceStatusResponse" name="payload"/>
+    </wsdl:message>
+
+    <wsdl:message name="getPersonDataRequest">
+        <wsdl:part element="types:getPersonDataRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="getPersonDataResponse">
+        <wsdl:part element="types:getPersonDataResponse" name="payload"/>
+    </wsdl:message>
+
+    <wsdl:message name="getPersonDataHistoryRequest">
+        <wsdl:part element="types:getPersonDataHistoryRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="getPersonDataHistoryResponse">
+        <wsdl:part element="types:getPersonDataResponse" name="payload"/>
+    </wsdl:message>
+
+    <wsdl:message name="findPersonsByPersCriteriaRequest">
+        <wsdl:part element="types:findPersonsByPersCriteriaRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="findPersonsByPersCriteriaResponse">
+        <wsdl:part element="types:findPersonsByPersCriteriaResponse" name="payload"/>
+    </wsdl:message>
+
+    <wsdl:message name="getMergeAncessorOipRequest">
+        <wsdl:part element="types:getMergeAncessorOipRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="getMergeAncessorOipResponse">
+        <wsdl:part element="types:getMergeAncessorOipResponse" name="payload"/>
+    </wsdl:message>
+
+    <wsdl:portType name="TFOMS_PortType">
+        <wsdl:operation name="getInsuranceStatus">
+            <wsdl:input message="tns:getInsuranceStatusRequest"/>
+            <wsdl:output message="tns:getInsuranceStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPersonData">
+            <wsdl:input message="tns:getPersonDataRequest"/>
+            <wsdl:output message="tns:getPersonDataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPersonDataHistory">
+            <wsdl:input message="tns:getPersonDataHistoryRequest"/>
+            <wsdl:output message="tns:getPersonDataHistoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="findPersonsByPersCriteria">
+            <wsdl:input message="tns:findPersonsByPersCriteriaRequest"/>
+            <wsdl:output message="tns:findPersonsByPersCriteriaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getMergeAncessorOip">
+            <wsdl:input message="tns:getMergeAncessorOipRequest"/>
+            <wsdl:output message="tns:getMergeAncessorOipResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="TFOMS_SoapBinding" type="tns:TFOMS_PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getInsuranceStatus">
+            <soap:operation soapAction="http://ffoms.ru/services/tfoms/getInsuranceStatus"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPersonData">
+            <soap:operation soapAction="http://ffoms.ru/services/tfoms/getPersonData"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPersonDataHistory">
+            <soap:operation soapAction="http://ffoms.ru/services/tfoms/getPersonDataHistory"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="findPersonsByPersCriteria">
+            <soap:operation soapAction="http://ffoms.ru/services/tfoms/findPersonsByPersCriteria"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMergeAncessorOip">
+            <soap:operation soapAction="http://ffoms.ru/services/tfoms/getMergeAncessorOip"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="TFOMS_Service">
+        <wsdl:documentation>TFOMS Service</wsdl:documentation>
+        <wsdl:port binding="tns:TFOMS_SoapBinding" name="TFOMS_Port">
+            <soap:address location="http://10.255.87.30:80/api/t-foms/integration/ws/wsdl/mpiPersonInfoServiceWs"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
