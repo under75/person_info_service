@@ -44,7 +44,7 @@ public class GetMergeAncessorOip extends PersonInfoService {
 	}
 
 	@Override
-	@Scheduled(cron = "0 0/10 8-23 * * *")
+//	@Scheduled(cron = "0 0/10 8-23 * * *")
 	public void process() {
 		Collection<MergeAncessorOip> entities = mergeAncessorOipRepository.findByDtreqIsNull();
 		entities.forEach(entity -> {
