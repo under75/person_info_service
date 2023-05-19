@@ -11,4 +11,6 @@ public interface PersonDataRepository extends JpaRepository<PersonData, Long> {
 
 	Collection<PersonData> findByDtReqIsNullAndHistoricalIsNull();
 
+	Collection<PersonData> findByDtReqIsNullAndHistorical(boolean b);
+
 }
