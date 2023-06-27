@@ -9,7 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpi_policy", schema = "OMCOWNER")
+@Table(name = "mpi_policy", schema = "ASY23")
 @IdClass(CompositeKey.class)
 public class Policy {
 	@Id

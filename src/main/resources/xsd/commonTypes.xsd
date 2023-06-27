@@ -162,7 +162,7 @@
             <documentation>ФИО</documentation>
         </annotation>
         <restriction base="string">
-            <pattern value="_?([А-ЯЁIV][а-яё]*(([- .,'`]|(( ')|( `)|(\. )|(, )))[А-ЯЁа-яёIV]+)*[.]?)+"/>
+            <pattern value="_?(([IVXLCMD]+([.][IVXLCMD]+)?[ ])?(([А-ЯЁ][а-яё]*(([ ]|( ?['`]|[.,] ?| ?[-] ?))[А-ЯЁа-яё]+)*[.]?)+)((( [А-ЯЁа-яё]+)+( [IVXLCMD]+([.][IVXLCMD]+)?)?)|(( [IVXLCMD]+([.][IVXLCMD]+)?)?(( [А-ЯЁа-яё]+)+)?)))+"/>
         </restriction>
     </simpleType>
 
@@ -378,6 +378,13 @@
             <element name="dudlType" type="string">
                 <annotation>
                     <documentation>Тип ДУДЛ</documentation>
+                </annotation>
+            </element>
+            <element minOccurs="0" name="dudlDateB" type="date">
+                <annotation>
+                    <documentation>Дата начала действия (или дата выдачи) ДУДЛ.
+                        Формат даты: ГГГГ-ММ-ДД.
+                    </documentation>
                 </annotation>
             </element>
         </sequence>

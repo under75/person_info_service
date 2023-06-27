@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MPI_GET_MERGE_ANCESSOR_OIP", schema = "OMCOWNER")
+@Table(name = "MPI_GET_MERGE_ANCESSOR_OIP", schema = "ASY23")
 public class MergeAncessorOip {
 	@Id
 	@Column(name = "rid")

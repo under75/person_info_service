@@ -10,7 +10,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpi_req", schema = "OMCOWNER")
+@Table(name = "mpi_req", schema = "ASY23")
 @IdClass(MPIReqId.class)
 public class MPIReq {
 	@Id

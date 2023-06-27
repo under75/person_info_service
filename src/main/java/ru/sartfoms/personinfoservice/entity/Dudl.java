@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpi_dudl", schema = "OMCOWNER")
+@Table(name = "mpi_dudl", schema = "ASY23")
 @IdClass(CompositeKey.class)
 public class Dudl {
 	@Id

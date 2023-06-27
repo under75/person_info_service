@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
 
@@ -147,6 +148,11 @@ public class GetPersonDataHistory extends PersonInfoService {
 									entity.getDudlType() != null ? String.valueOf(entity.getDudlType()) : null);
 							dudl.setDudlSer(entity.getDudlSer());
 							dudl.setDudlNum(entity.getDudlNum());
+							try {
+								dudl.setDudlDateB(DatatypeFactory.newInstance()
+										.newXMLGregorianCalendar(entity.getDudlEffDate().toString()));
+							} catch (DatatypeConfigurationException e) {
+							}
 							searchInfo.setDudl(dudl);
 						}
 						searchInfo.setOip(entity.getOip());
@@ -165,14 +171,16 @@ public class GetPersonDataHistory extends PersonInfoService {
 							pcyData = null;
 						}
 						searchInfo.setPcy(pcyData);
-						SnilsDrData snilsDrData = new SnilsDrData();
-						try {
-							snilsDrData.setBirthDay(DatatypeFactory.newInstance()
-									.newXMLGregorianCalendar(entity.getBirthDay().toString()));
-						} catch (Exception e) {
+						if (entity.getSnils() != null || entity.getBirthDay() != null) {
+							SnilsDrData snilsDrData = new SnilsDrData();
+							try {
+								snilsDrData.setBirthDay(DatatypeFactory.newInstance()
+										.newXMLGregorianCalendar(entity.getBirthDay().toString()));
+							} catch (Exception e) {
+							}
+							snilsDrData.setSnils(entity.getSnils());
+							searchInfo.setSnilsDr(snilsDrData);
 						}
-						snilsDrData.setSnils(entity.getSnils());
-						searchInfo.setSnilsDr(snilsDrData);
 						paramsType.setPersonSearchInfo(searchInfo);
 
 						request.setPersonDataHistorySearchParams(paramsType);

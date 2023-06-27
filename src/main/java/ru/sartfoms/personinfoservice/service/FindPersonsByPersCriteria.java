@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
 
@@ -124,19 +123,22 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 						}
 						persCriteriaType.setErn(entity.getErn());
 						PersonCommonSearchParamsType commonSearchParamsType = new PersonCommonSearchParamsType();
-						PersonDocIdentSerNum docIdentSerNum = new PersonDocIdentSerNum();
-						docIdentSerNum.setDudlNum(entity.getDudlNum());
-						docIdentSerNum.setDudlSer(entity.getDudlSer());
-						docIdentSerNum.setDudlType(String.valueOf(entity.getDudlType()));
-						commonSearchParamsType.setDudl(docIdentSerNum);
+						if (entity.getDudlNum() != null) {
+							PersonDocIdentSerNum docIdentSerNum = new PersonDocIdentSerNum();
+							docIdentSerNum.setDudlNum(entity.getDudlNum());
+							docIdentSerNum.setDudlSer(entity.getDudlSer());
+							docIdentSerNum.setDudlType(String.valueOf(entity.getDudlType()));
+							commonSearchParamsType.setDudl(docIdentSerNum);
+						}
 						commonSearchParamsType.setOip(entity.getOip());
 						PcyData pcyData = new PcyData();
 						pcyData.setPcySer(entity.getPcySer());
 						pcyData.setPcyType(entity.getPcyType());
 						if (entity.getPcyType() != null && POLICY_TYPE.valueOf(entity.getPcyType()) == POLICY_TYPE.С) {
 							pcyData.setPcyNum(entity.getPcyNum());
-						} else if (entity.getPcyType() != null && (POLICY_TYPE.valueOf(entity.getPcyType()) == POLICY_TYPE.В
-								|| POLICY_TYPE.valueOf(entity.getPcyType()) == POLICY_TYPE.Е)) {
+						} else if (entity.getPcyType() != null
+								&& (POLICY_TYPE.valueOf(entity.getPcyType()) == POLICY_TYPE.В
+										|| POLICY_TYPE.valueOf(entity.getPcyType()) == POLICY_TYPE.Е)) {
 							pcyData.setTmpcertNum(entity.getPcyNum());
 						} else if (entity.getPcyNum() != null) {
 							pcyData.setEnp(entity.getPcyNum());
@@ -144,15 +146,17 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 							pcyData = null;
 						}
 						commonSearchParamsType.setPcy(pcyData);
-						SnilsDrData snilsDrData = new SnilsDrData();
-						try {
-							snilsDrData.setBirthDay(DatatypeFactory.newInstance()
-									.newXMLGregorianCalendar(entity.getBirthDay().toString()));
-						} catch (DatatypeConfigurationException e) {
-							e.printStackTrace();
+						if (entity.getSnils() != null || entity.getBirthDay() != null) {
+							SnilsDrData snilsDrData = new SnilsDrData();
+							try {
+								snilsDrData.setBirthDay(DatatypeFactory.newInstance()
+										.newXMLGregorianCalendar(entity.getBirthDay().toString()));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							snilsDrData.setSnils(entity.getSnils());
+							commonSearchParamsType.setSnilsDr(snilsDrData);
 						}
-						snilsDrData.setSnils(entity.getSnils());
-						commonSearchParamsType.setSnilsDr(snilsDrData);
 						persCriteriaType.setPersonSearchInfo(commonSearchParamsType);
 						PaginationRequestType paginationRequestType = new PaginationRequestType();
 						paginationRequestType.setItemPerPage(entity.getItemPerPage());
@@ -251,7 +255,7 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 				result.setBirthDay(personDataShort.getBirthDay().toGregorianCalendar().toZonedDateTime().toLocalDate());
 				result.setGender(personDataShort.getGender());
 				result.setOip(personDataShort.getOip());
-				
+
 				persCriteriaRespRepository.save(result);
 			}
 		}

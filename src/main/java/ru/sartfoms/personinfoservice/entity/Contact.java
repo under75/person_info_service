@@ -7,7 +7,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpi_contact", schema = "OMCOWNER")
+@Table(name = "mpi_contact", schema = "ASY23")
 @IdClass(CompositeKey.class)
 public class Contact {
 	@Id

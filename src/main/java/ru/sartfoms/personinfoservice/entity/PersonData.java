@@ -1,26 +1,18 @@
 package ru.sartfoms.personinfoservice.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.util.StringUtils;
-
-
 @Entity
-@Table(name = "mpi_person_data", schema = "OMCOWNER")
+@Table(name = "mpi_person_data", schema = "ASY23")
 public class PersonData {
 	@Id
 	@Column(name = "rid")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")
-	@SequenceGenerator(name = "id_sequence", sequenceName = "OMCOWNER.MPI_SEQ", allocationSize = 1)
 	private Long rid;
 
 	@Column(name = "hist")
@@ -31,7 +23,7 @@ public class PersonData {
 
 	@Column(name = "polis_type")
 	private String pcyType;
-	
+
 	@Column(name = "pcyser")
 	private String pcySer;
 
@@ -46,12 +38,15 @@ public class PersonData {
 
 	@Column(name = "dudltype")
 	private Integer dudlType;
+	
+	@Column(name = "dudldateb")
+	private LocalDate dudlEffDate;
 
 	@Column(name = "snils")
 	private String snils;
 
 	@Column(name = "dr")
-	private Date birthDay;
+	private LocalDate birthDay;
 
 	@Column(name = "fam")
 	private String lastName;
@@ -63,13 +58,13 @@ public class PersonData {
 	private String patronymic;
 
 	@Column(name = "dt")
-	private Date dt;
+	private LocalDate dt;
 
 	@Column(name = "dtfrom")
-	private Date dtFrom;
+	private LocalDate dtFrom;
 
 	@Column(name = "dtto")
-	private Date dtTo;
+	private LocalDate dtTo;
 
 	@Column(name = "showx")
 	private String show;
@@ -78,14 +73,14 @@ public class PersonData {
 	private String user;
 
 	@Column(name = "dt_ins")
-	private Date dtIns;
-	
+	private LocalDateTime dtIns;
+
 	@Column(name = "err")
 	private Boolean hasError;
-	
+
 	@Column(name = "oip_resp")
 	private String oipRes;
-	
+
 	@Column(name = "dt_req")
 	private LocalDateTime dtReq;
 
@@ -175,16 +170,8 @@ public class PersonData {
 		this.snils = snils;
 	}
 
-	public Date getBirthDay() {
-		return birthDay;
-	}
-
-	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
-	}
-
 	public String getLastName() {
-		return StringUtils.capitalize(lastName != null ? lastName.toLowerCase() : "");
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
@@ -192,7 +179,7 @@ public class PersonData {
 	}
 
 	public String getFirstName() {
-		return StringUtils.capitalize(firstName != null ? firstName.toLowerCase() : "");
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
@@ -200,35 +187,11 @@ public class PersonData {
 	}
 
 	public String getPatronymic() {
-		return StringUtils.capitalize(patronymic != null ? patronymic.toLowerCase() : "");
+		return patronymic;
 	}
 
 	public void setPatronymic(String patronymic) {
 		this.patronymic = patronymic;
-	}
-
-	public Date getDt() {
-		return dt;
-	}
-
-	public void setDt(Date dt) {
-		this.dt = dt;
-	}
-
-	public Date getDtFrom() {
-		return dtFrom;
-	}
-
-	public void setDtFrom(Date dtFrom) {
-		this.dtFrom = dtFrom;
-	}
-
-	public Date getDtTo() {
-		return dtTo;
-	}
-
-	public void setDtTo(Date dtTo) {
-		this.dtTo = dtTo;
 	}
 
 	public String getShow() {
@@ -245,14 +208,6 @@ public class PersonData {
 
 	public void setUser(String user) {
 		this.user = user;
-	}
-
-	public Date getDtIns() {
-		return dtIns;
-	}
-
-	public void setDtIns(Date dtIns) {
-		this.dtIns = dtIns;
 	}
 
 	public Boolean getHasError() {
@@ -277,6 +232,54 @@ public class PersonData {
 
 	public void setDtReq(LocalDateTime dtReq) {
 		this.dtReq = dtReq;
+	}
+
+	public LocalDate getBirthDay() {
+		return birthDay;
+	}
+
+	public LocalDate getDt() {
+		return dt;
+	}
+
+	public LocalDate getDtFrom() {
+		return dtFrom;
+	}
+
+	public LocalDate getDtTo() {
+		return dtTo;
+	}
+
+	public LocalDateTime getDtIns() {
+		return dtIns;
+	}
+
+	public void setBirthDay(LocalDate birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public void setDt(LocalDate dt) {
+		this.dt = dt;
+	}
+
+	public void setDtFrom(LocalDate dtFrom) {
+		this.dtFrom = dtFrom;
+	}
+
+	public void setDtTo(LocalDate dtTo) {
+		this.dtTo = dtTo;
+	}
+
+	public void setDtIns(LocalDateTime dtIns) {
+		this.dtIns = dtIns;
+	}
+
+	public LocalDate getDudlEffDate() {
+		return dudlEffDate;
+	}
+
+	public void setDudlEffDate(LocalDate dudlEffDate) {
+		this.dudlEffDate = dudlEffDate;
 	}
 
 }

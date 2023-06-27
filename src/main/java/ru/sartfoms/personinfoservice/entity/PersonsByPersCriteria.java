@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpi_find_person_by_crit", schema = "OMCOWNER")
+@Table(name = "mpi_find_person_by_crit", schema = "ASY23")
 public class PersonsByPersCriteria {
 	@Id
 	@Column(name = "rid")

@@ -9,7 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mpi_find_person_by_crit_resp", schema = "OMCOWNER")
+@Table(name = "mpi_find_person_by_crit_resp", schema = "ASY23")
 @IdClass(CompositeKey.class)
 public class PersonsByPersCriteriaResp {
 	@Id
