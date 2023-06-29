@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
 
@@ -146,7 +145,7 @@ public class GetPersonData extends PersonInfoService {
 							try {
 								dudl.setDudlDateB(DatatypeFactory.newInstance()
 										.newXMLGregorianCalendar(entity.getDudlEffDate().toString()));
-							} catch (DatatypeConfigurationException e) {
+							} catch (Exception e) {
 							}
 							searchInfo.setDudl(dudl);
 						}

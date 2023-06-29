@@ -83,6 +83,9 @@ public class PersonsByPersCriteria {
 
 	@Column(name = "dudlnum")
 	private String dudlNum;
+	
+	@Column(name = "dudldateb")
+	private LocalDate dudlEffDate;
 
 	@Column(name = "snils")
 	private String snils;
@@ -376,6 +379,14 @@ public class PersonsByPersCriteria {
 
 	public void setRespItemPerPage(Integer respItemPerPage) {
 		this.respItemPerPage = respItemPerPage;
+	}
+
+	public LocalDate getDudlEffDate() {
+		return dudlEffDate;
+	}
+
+	public void setDudlEffDate(LocalDate dudlEffDate) {
+		this.dudlEffDate = dudlEffDate;
 	}
 
 }

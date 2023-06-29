@@ -87,15 +87,17 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 						request.setExternalRequestId(extRid);
 						PersCriteriaType persCriteriaType = new PersCriteriaType();
 						persCriteriaType.setTerrOkato(entity.getTerrOkato());
-						FioData fioData = new FioData();
-						fioData.setDost(entity.getDost());
-						fioData.setFirstName(entity.getFirstName());
-						fioData.setNoCitizenship(entity.getNoCitizenship());
-						fioData.setOksm(entity.getOksm());
-						fioData.setOldsfp(entity.getOldsfp() ? BigInteger.ONE : BigInteger.ZERO);
-						fioData.setPatronymic(entity.getPatronymic());
-						fioData.setSurname(entity.getLastName());
-						persCriteriaType.setFio(fioData);
+						if (entity.getFirstName() != null || entity.getPatronymic() != null || entity.getLastName() != null) {
+							FioData fioData = new FioData();
+							fioData.setDost(entity.getDost());
+							fioData.setFirstName(entity.getFirstName());
+							fioData.setNoCitizenship(entity.getNoCitizenship());
+							fioData.setOksm(entity.getOksm());
+							fioData.setOldsfp(entity.getOldsfp() ? BigInteger.ONE : BigInteger.ZERO);
+							fioData.setPatronymic(entity.getPatronymic());
+							fioData.setSurname(entity.getLastName());
+							persCriteriaType.setFio(fioData);
+						}
 						try {
 							persCriteriaType.setBirthDayFrom(DatatypeFactory.newInstance()
 									.newXMLGregorianCalendar(entity.getBirthDayFrom().toString()));
@@ -128,6 +130,11 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 							docIdentSerNum.setDudlNum(entity.getDudlNum());
 							docIdentSerNum.setDudlSer(entity.getDudlSer());
 							docIdentSerNum.setDudlType(String.valueOf(entity.getDudlType()));
+							try {
+								docIdentSerNum.setDudlDateB(DatatypeFactory.newInstance()
+										.newXMLGregorianCalendar(entity.getDudlEffDate().toString()));
+							} catch (Exception e) {
+							}
 							commonSearchParamsType.setDudl(docIdentSerNum);
 						}
 						commonSearchParamsType.setOip(entity.getOip());

@@ -38,19 +38,16 @@ public class InsuranceStatusResp {
 	@Column(name = "policystatus")
 	private String pcyStatus;
 	
-	@Column(name = "dudlser")
-	private String dudlSer;
-	
 	@Column(name = "smo")
 	private Integer smoCode;
 	
 	@Column(name = "ter")
 	private String okatoCode;
 	
-	@Column(name = "policyValidFrom")
+	@Column(name = "policyvalidfrom")
 	private LocalDate policyValidFrom;
 	
-	@Column(name = "policyValidTo")
+	@Column(name = "policyvalidto")
 	private LocalDate policyValidTo;
 
 	public Long getRid() {
@@ -87,10 +84,6 @@ public class InsuranceStatusResp {
 
 	public String getPcyStatus() {
 		return pcyStatus;
-	}
-
-	public String getDudlSer() {
-		return dudlSer;
 	}
 
 	public Integer getSmoCode() {
@@ -143,10 +136,6 @@ public class InsuranceStatusResp {
 
 	public void setPcyStatus(String pcyStatus) {
 		this.pcyStatus = pcyStatus;
-	}
-
-	public void setDudlSer(String dudlSer) {
-		this.dudlSer = dudlSer;
 	}
 
 	public void setSmoCode(Integer smoCode) {

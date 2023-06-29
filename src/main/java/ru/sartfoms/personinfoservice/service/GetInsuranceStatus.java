@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
 
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.client.core.WebServiceMessageCallback;
 import org.springframework.ws.client.core.WebServiceMessageExtractor;
@@ -38,6 +38,7 @@ import ru.sartfoms.schemas.generated.ResponseErrorData;
 import ru.sartfoms.schemas.generated.SnilsDrData;
 import ru.sartfoms.schemas.generated.StatusData;
 
+@Service
 public class GetInsuranceStatus extends PersonInfoService {
 	private final WebServiceTemplate template;
 	private final MPIReqRepository mpiReqRepository;
@@ -97,7 +98,7 @@ public class GetInsuranceStatus extends PersonInfoService {
 							try {
 								dudl.setDudlDateB(DatatypeFactory.newInstance()
 										.newXMLGregorianCalendar(start.getDudlEffDate().toString()));
-							} catch (DatatypeConfigurationException e) {
+							} catch (Exception e) {
 							}
 							searchInfo.setDudl(dudl);
 						}
@@ -207,7 +208,10 @@ public class GetInsuranceStatus extends PersonInfoService {
 			StatusData data = response.getStatus();
 			res.setOip(data.getOip());
 			res.setFio(data.getFio());
-			res.setBirthDay(data.getBirthDay().toGregorianCalendar().toZonedDateTime().toLocalDate());
+			try {
+				res.setBirthDay(data.getBirthDay().toGregorianCalendar().toZonedDateTime().toLocalDate());
+			} catch (Exception e) {
+			}
 			res.setGender(data.getGender());
 			res.setPcyType(data.getPolicyType());
 			res.setPcySer(data.getPolicySer());
@@ -219,8 +223,14 @@ public class GetInsuranceStatus extends PersonInfoService {
 				e.printStackTrace();
 			}
 			res.setOkatoCode(data.getTerr());
-			res.setPolicyValidFrom(data.getPolicyValidFrom().toGregorianCalendar().toZonedDateTime().toLocalDate());
-			res.setPolicyValidTo(data.getPolicyValidTo().toGregorianCalendar().toZonedDateTime().toLocalDate());
+			try {
+				res.setPolicyValidFrom(data.getPolicyValidFrom().toGregorianCalendar().toZonedDateTime().toLocalDate());
+			} catch (Exception e) {
+			}
+			try {
+				res.setPolicyValidTo(data.getPolicyValidTo().toGregorianCalendar().toZonedDateTime().toLocalDate());
+			} catch (Exception e) {
+			}
 
 			insuranceStatusRespRepository.save(res);
 		}
