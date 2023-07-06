@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.sartfoms</groupId>
 	<artifactId>person-info-service</artifactId>
-	<version>5.0</version>
+	<version>5.1</version>
 	<name>person-info-service</name>
 	<description>Запрос сведений о ЗЛ</description>
 	<properties>

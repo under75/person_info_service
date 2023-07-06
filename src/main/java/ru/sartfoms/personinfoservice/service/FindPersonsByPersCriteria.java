@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
@@ -59,7 +58,7 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 	}
 
 	@Override
-	@Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
+	@Scheduled(cron = "0 0/1 8-23 * * *")
 	public void process() {
 		Collection<PersonsByPersCriteria> entities = persCriteriaRepository.findByDtReqIsNull();
 		entities.forEach(entity -> {
@@ -87,7 +86,8 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 						request.setExternalRequestId(extRid);
 						PersCriteriaType persCriteriaType = new PersCriteriaType();
 						persCriteriaType.setTerrOkato(entity.getTerrOkato());
-						if (entity.getFirstName() != null || entity.getPatronymic() != null || entity.getLastName() != null) {
+						if (entity.getFirstName() != null || entity.getPatronymic() != null
+								|| entity.getLastName() != null) {
 							FioData fioData = new FioData();
 							fioData.setDost(entity.getDost());
 							fioData.setFirstName(entity.getFirstName());
@@ -159,7 +159,6 @@ public class FindPersonsByPersCriteria extends PersonInfoService {
 								snilsDrData.setBirthDay(DatatypeFactory.newInstance()
 										.newXMLGregorianCalendar(entity.getBirthDay().toString()));
 							} catch (Exception e) {
-								e.printStackTrace();
 							}
 							snilsDrData.setSnils(entity.getSnils());
 							commonSearchParamsType.setSnilsDr(snilsDrData);

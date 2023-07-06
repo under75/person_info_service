@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
@@ -57,7 +56,7 @@ public class GetInsuranceStatus extends PersonInfoService {
 	}
 
 	@Override
-	@Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
+	@Scheduled(cron = "0 0/1 8-23 * * *")
 	protected void process() {
 		Collection<InsuranceStatus> starts = insuranceStatusRepository.findByDtReqIsNull();
 		starts.forEach(start -> {

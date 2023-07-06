@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.transform.TransformerException;
@@ -97,7 +96,7 @@ public class GetPersonDataHistory extends PersonInfoService {
 	}
 
 	@Override
-	@Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
+	@Scheduled(cron = "0 0/1 8-23 * * *")
 	public void process() {
 		Collection<PersonData> entities = personDataRepository.findByDtReqIsNullAndHistorical(true);
 		entities.forEach(entity -> {

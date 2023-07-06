@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.xml.transform.TransformerException;
 
@@ -45,7 +44,7 @@ public class GetMergeAncessorOip extends PersonInfoService {
 	}
 
 	@Override
-	@Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
+	@Scheduled(cron = "0 0/1 8-23 * * *")
 	public void process() {
 		Collection<MergeAncessorOip> entities = mergeAncessorOipRepository.findByDtreqIsNull();
 		entities.forEach(entity -> {
